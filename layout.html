@@ -1,0 +1,219 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107356218-4"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-107356218-2');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="google" value="notranslate">
+<load target="assets/uikit.min.js" index="-110500"/>
+<load target="assets/uikit-icons.min.js" index="-110500"/>
+<load target="assets/uikit.min.css" index="-110100"/>
+<load target="assets/uikit.extra.css" index="-110000"/>
+<script>
+    jQuery("link[rel=stylesheet][href*='rhymix.less.min.css']").remove();
+    jQuery("link[rel=stylesheet][href*='rhymix.scss.min.css']").remove();
+</script>
+<div id="uk-body" class="tm-wrap uk-offcanvas-content">
+    <div uk-sticky="media: 960" class="uk-navbar-container uk-sticky uk-sticky-fixed">
+        <div class="tm-header uk-container uk-container-expand">
+            <nav class="uk-navbar">
+                <div class="uk-navbar-left">
+                    <a href="../" class="uk-navbar-item uk-logo uk-margin-small-right">
+                        <block cond="!$layout_info->logo_img && !$layout_info->logo_img_custom">UIkit&nbsp;<span class="uk-text-small">유저인터페이스키트</span></block>
+                        <img cond="$layout_info->logo_img && !$layout_info->logo_img_custom" src="https://www.kikni.com/img/logo.svg" class="tm-logo" hidden="true">
+                        <img cond="$layout_info->logo_img_custom" uk-svg="" src="assets/{$layout_info->logo_img_custom}" class="tm-logo" hidden="true">
+                    </a>
+                    <ul class="uk-navbar-nav uk-visible@m">
+                        <li loop="$global_menu->list=>$key1,$val1" class="<!--@if($val1['selected'])-->uk-active<!--@end-->">
+                            <a href="{$val1['href']}" >{$val1['link']}</a>
+                            <!--@if($val1['selected'])-->{@ $navigater = $val1;}<!--@end-->
+                            <div uk-dropdown  cond="$val1['list']" style="margin:0;">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li loop="$val1['list']=>$key2,$val2" class="tm-padding-left uk-padding-xsmall-vertical <!--@if($val2['selected'])-->uk-active<!--@end-->">
+                                        <a href="{$val2['href']}">{$val2['link']}</a>
+                                        <ul class="uk-nav-default uk-nav-sub uk-padding-remove-vertical uk-margin-small-bottom" cond="$val2['list']">
+                                        <li loop="$val2['list']=>$key3,$val3" class="uk-active"|cond="$val3['selected']"><a class="tm-padding-left uk-padding-xsmall-vertical" href="{$val3['href']}">{$val3['link']}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav um-side">
+                        <li class="uk-visible@m" style="float:right;">
+                        <!--@if($is_logged)-->
+                            <!--// after_login -->
+                            <a href="{getUrl('act', 'dispMemberInfo')}" class="uk-padding-remove">
+                                <!--@if($logged_info->profile_image->src)-->
+                                <img class="user_profile uk-border-circle uk-margin-right" src="{$logged_info->profile_image->src}" style="height:40px;width:40px" alt="{$logged_info->nick_name}" /> 
+                                <!--@else-->
+                                <img src="assets/profile-no.svg" alt="" class="user_profile uk-border-circle uk-margin-right" style="height:40px;width:40px" alt="{$logged_info->nick_name}" />
+                                <!--@end-->
+                                <span>{$logged_info->nick_name}</span>
+                            </a>
+                            <div uk-dropdown style="margin:0;">
+                                <ul class="uk-nav uk-navbar-dropdown-nav uk-dropdown-login">
+                                    <li cond="$logged_info->is_admin=='Y'"><a href="{getUrl('module', 'admin','act','','mid','','document_srl','')}">관리자 메뉴</a></li>
+                                    <li loop="$logged_info->menu_list => $key, $val"><a href="{getUrl('act', $key, 'member_srl', '', 'page', '')}">{lang($val)}</a></li>
+                                    <li><a href="{getUrl('act', 'dispMemberLogout')}">{$lang->cmd_logout}</a></li>
+                                </ul>
+                                <span class="edge"></span>
+                            </div>
+                            <!--// after_login -->
+                        <!--@else-->
+                        <!--// before_login -->
+                            <a href="{getUrl('act', 'dispMemberLoginForm')}" class="uk-padding-remove">
+                                <img src="assets/profile-no.svg" alt="" class="user_profile uk-border-circle uk-margin-right" style="height:40px;width:40px" alt="GUESTUESR" />
+                                <span>{$lang->cmd_login}</span>
+                            </a>
+                            <div uk-dropdown style="margin:0;">
+                                <ul class="uk-nav uk-navbar-dropdown-nav uk-dropdown-login">
+                                    <li><a id="ly_login_btn" href="{getUrl('act', 'dispMemberLoginForm')}">{$lang->cmd_login}</a></li>
+                                    <li><a href="{getUrl('act', 'dispMemberSignUpForm')}">{$lang->cmd_signup}</a></li>
+                                </ul>
+                                <span class="edge"></span>
+                            </div>
+                            <!--// before_login -->
+                        <!--@end-->
+                        </li>
+                        <li>
+                            <a uk-search-icon="" uk-toggle="" class="uk-navbar-toggle uk-navbar-toggle-icon uk-icon" href="#modal-search" style="margin:0;padding:0 10px 0 30px;">&nbsp;</a>
+                        </li>
+                        <li>
+                            <a uk-navbar-toggle-icon="" uk-toggle="" class="uk-navbar-toggle uk-hidden@m uk-navbar-toggle-icon uk-icon" href="#offcanvas">&nbsp;</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="tm-container uk-height-viewport">
+        <div class="tm-sidebar-left uk-visible@m">
+            <h3 style="vertical-align: inherit;"><a href="{$navigater['href']}">{$navigater['link']}</a></h3>
+            <ul class="uk-nav uk-nav-default tm-nav" cond="$navigater['list']">
+                <li loop="$navigater['list']=>$key1,$val1" class="uk-margin-remove uk-nav-header <!--@if($val1['selected'])-->uk-active<!--@end-->">
+                    <a href="{$val1['href']}" class="">{$val1['link']}</a>
+                    <ul class="uk-nav-sub" cond="$val1['list']">
+                        <li loop="$val1['list']=>$key2,$val2" class="uk-active"|cond="$val2['selected']">
+                            <a href="{$val2['href']}" >{$val2['link']}</a>
+                            <ul class="uk-nav-sub" cond="$val2['list']">
+                                <li loop="$val2['list']=>$key3,$val3" class="<!--@if($val3['selected'])-->uk-active<!--@end-->">
+                                    <a href="{$val3['href']}" >{$val3['link']}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="tm-main uk-section uk-section-default">
+            <div class="uk-container uk-container-small uk-position-relative">
+                <div><!----><div>{$content}</div></div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="uk-margin-remove-bottom uk-margin-top"/>
+
+    <!--// 하단메뉴 시작 -->
+    <div class="tm-footer uk-section uk-section-small uk-padding-small uk-padding-remove-vertical uk-position-relative  uk-sticky uk-sticky-fixed" style="z-index: 100;" uk-sticky="bottom: #uk-body">
+        <div class="uk-container uk-padding-small uk-container-expand">
+            <div uk-grid="" class="uk-child-width-auto@m uk-flex-middle uk-grid" style="min-height:40px">
+                <div class="uk-first-column">
+                    <ul uk-margin="" class="uk-subnav uk-flex-center">
+                        {@$fc=0}
+                        <li loop="$foot_menu->list=>$key1,$val1" class="<!--@if($fc==0)-->uk-first-column <!--@end--> <!--@if($val1['selected'])-->uk-active<!--@end-->">
+                                <a href="{$val1['href']}" >{$val1['link']}</a>
+                                {@$fc++}
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-margin-auto">
+                    <div class="uk-text-middle@m uk-text-center">
+                        <div uk-grid="" class="uk-child-width-auto uk-grid-small uk-flex-center uk-grid">
+                            <div class="uk-first-column"><a href="https://github.com/kikni" uk-icon="icon: github" class="uk-icon-link uk-icon"></a></div>
+                            <!--// <div><a href="" uk-icon="icon: facebook" class="uk-icon-link uk-icon"></a></div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="uk-text-middle@m uk-text-center tm-footer-bottom-right">
+                        <a href="javascript:alert('키큰아이닷컴의 모든 게시글은 게시자에게 권리가 주어집니다.\n\n이와 관련된 자세한 내용은\n문서화(https://mr.kikni.com/docs)를 참조하시기 바랍니다.');" style="color: #999;font-size: 0.875rem;text-decoration:none;">Copyright &copy; KIKNI 2011</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// 하단메뉴 끝 -->
+</div>
+
+<!--// 모바일 좌측메뉴-->
+<div id="offcanvas" uk-offcanvas="overlay: true" class="uk-offcanvas" style>
+    <div class="uk-offcanvas-bar">
+        <div class="uk-alert tm-offcanvas-close uk-padding-small uk-text-right">
+            <a href="#offcanvas" uk-toggle=""><i class="xi-close" aria-hidden="true"></i></a>
+        </div>
+        <div class="uk-alert tm-offcanvas-member" uk-grid cond="$is_logged">
+            <div class="uk-width-auto uk-margin-remove uk-padding-remove">
+                <!--@if($logged_info->profile_image->src)-->
+                <img src="{$logged_info->profile_image->src}" alt="{$logged_info->nick_name}" alt="" class="user_profile uk-border-circle" width="33" height="33" />
+                <!--@else-->
+                <img src="assets/profile-no.svg" alt="{$logged_info->nick_name}" class="user_profile uk-border-circle" width="33" height="33" />
+                <!--@end-->
+            </div>
+            <div class="uk-width-expand uk-margin-remove uk-padding-remove">
+                <h4>{$logged_info->nick_name}</h4>
+                <p class="uk-text-small">
+                <a href="{getUrl('act', 'dispMemberInfo', 'member_srl', '', 'page', '')}" class="uk-button uk-button-text uk-button-small">내정보</a>
+                <a class="uk-button uk-button-text uk-button-small" href="{getUrl('act', 'dispMemberLogout')}" >{$lang->cmd_logout}</a>
+                </p>
+            </div>
+        </div>
+        <div class="uk-alert tm-offcanvas-member" uk-grid cond="!$is_logged">
+            <div class="uk-width-auto uk-margin-remove uk-padding-remove">
+                <img src="assets/profile-no.svg" alt="비회원" class="user_profile uk-border-circle" width="33" height="33" />
+            </div>
+            <div class="uk-width-expand uk-margin-remove uk-padding-remove">
+                <h4>Guest</h4>
+                <p class="uk-text-small">
+                <a href="{getUrl('act', 'dispMemberLoginForm')}" class="uk-button uk-button-text uk-button-small">{$lang->cmd_login}</a>
+                </p>
+            </div>
+        </div>
+        <div class="uk-panel">
+            <ul class="uk-nav uk-nav-default um-nav um-side">
+                <li loop="$global_menu->list=>$key1,$val1" class="uk-margin-remove uk-margin-small-top uk-nav-header <!--@if($val1['selected'])-->uk-active<!--@end-->">
+                    <a href="{$val1['href']}" class="">{$val1['link']}</a>
+                    <ul class="uk-nav-sub" cond="$val1['list']">
+                        <li loop="$val1['list']=>$key2,$val2" class="uk-active" |cond="$val2['selected']">
+                            <a href="{$val2['href']}">{$val2['link']}</a>
+                            <ul class="uk-nav-sub" cond="$val2['list']">
+                                <li loop="$val2['list']=>$key3,$val3" class="<!--@if($val3['selected'])-->uk-active<!--@end-->">
+                                    <a href="{$val3['href']}">{$val3['link']}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal-search" class="uk-search uk-modal-full uk-modal" uk-modal>
+    <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <!--// SEARCH -->
+        <form action="{getUrl()}" method="get" class="uk-search uk-search-large" no-error-return-url="true">
+            <input type="hidden" name="vid" value="{$vid}" />
+            <input type="hidden" name="mid" value="{$mid}" />
+            <input type="hidden" name="act" value="IS" />
+            <input class="uk-search-input uk-text-center" name="is_keyword" type="search" required placeholder="검색어를 입력하세요" title="{$lang->cmd_search}" value="{$is_keyword}" autofocus style="border-bottom:3px solid #999;">
+        </form>
+        <!--// SEARCH -->
+    </div>
+</div>

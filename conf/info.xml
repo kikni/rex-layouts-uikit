@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.2">
+  <title xml:lang="ko">UIKIT3 레이아웃</title>
+  <title xml:lang="en">UIKIT3 layout</title>
+  <description xml:lang="ko">UIKIT3 기반 XE용 표준 레이아웃입니다.</description>
+  <version>3.0.0</version>
+  <date>2018-01-01</date>
+  <author email_address="developers@kikni.com" link="http://www.kikni.com/">
+    <name xml:lang="ko">키큰아이</name>
+    <name xml:lang="en">KIKNI</name>
+  </author>
+  <menus>
+    <menu name="global_menu" maxdepth="3" default="true">
+      <title xml:lang="ko">전역 메뉴</title>
+      <title xml:lang="en">Global Menu</title>
+    </menu>
+    <menu name="foot_menu" maxdepth="3" default="true">
+			<title xml:lang="ko">하단 메뉴</title>
+			<title xml:lang="en">Footer Menu</title>
+		</menu>
+  </menus>
+  <extra_vars>
+		<group>
+			<title xml:lang="ko">일반</title>
+			<var name="logo_img" type="image">
+				<title xml:lang="ko">로고 이미지</title>
+			</var>
+      <var name="logo_width" type="text">
+  			<title xml:lang="ko">로고 이미지 가로폭 (예: 100px)</title>
+  		</var>
+			<var name="logo_text" type="text">
+				<title xml:lang="ko">사이트 로고 문자</title>
+			</var>
+			<var name="logo_img_custom" type="text">
+				<title xml:lang="ko">벡터(SVG)이미지 업로드 경로</title>
+				<description xml:lang="ko">벡터 이미지 업로드가 불가능하여 FTP에서 "/설치위치/layouts/uikit/assets/"에 업로드후 입력하십시요. </description>
+			</var>
+      <var name="subnav_in_main" type="radio">
+  			<title xml:lang="ko">메인에서 서브 메뉴 표시 여부</title>
+  			<options value="">
+  				<title xml:lang="ko">표시안함 (기본값)</title>
+  			</options>
+  			<options value="Y">
+  				<title xml:lang="ko">표시함</title>
+  			</options>
+  		</var>
+			<var name="footer_copyright" type="textarea">
+				<title xml:lang="ko">카피라이트 내용</title>
+			</var>
+		</group>
+    <!--
+    <group>
+			<title xml:lang="ko">메인</title>
+      <var name="main_visual" type="radio">
+        <title xml:lang="ko">메인에서 메인 비주얼 사용 여부</title>
+        <options value="">
+          <title xml:lang="ko">표시함 (기본값)</title>
+        </options>
+        <options value="N">
+          <title xml:lang="ko">표시안함</title>
+        </options>
+      </var>
+		</group>
+    <group>
+			<title xml:lang="ko">서브</title>
+      <var name="sub_content_top_on" type="radio">
+  			<title xml:lang="ko">서브 메뉴 - 최상단 커스텀 컨텐츠 사용 여부</title>
+  			<options value="">
+  				<title xml:lang="ko">사용안함 (기본값)</title>
+  			</options>
+  			<options value="Y">
+  				<title xml:lang="ko">사용함</title>
+  			</options>
+  		</var>
+    </group>
+    -->
+	</extra_vars>
+</layout>
